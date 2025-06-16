@@ -1,0 +1,44 @@
+{
+  "name": "ai-prompt-generator",
+  "version": "0.2.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "test-api": "node scripts/test-api.js",
+    "test-form": "node scripts/test-form-data.js",
+    "test-models": "node scripts/test-model-selection.js",
+    "test-industry": "node scripts/test-industry-job.js",
+    "test-pagination": "node scripts/test-pagination.js",
+    "test-markdown": "node scripts/test-markdown-render.js",
+    "test-siliconflow": "node scripts/test-siliconflow.js",
+    "test-pagination-fix": "node scripts/test-pagination-fix.js",
+    "test-deepseek": "node scripts/test-deepseek-prompt-generation.js",
+    "test-resume-input": "node scripts/test-resume-input.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.5.0",
+    "next": "14.0.4",
+    "node-fetch": "^3.3.2",
+    "pdfjs-dist": "^4.10.38",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-hot-toast": "^2.4.1",
+    "react-markdown": "^10.1.0",
+    "remark-gfm": "^4.0.1",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "autoprefixer": "^10.0.1",
+    "eslint": "^8",
+    "eslint-config-next": "14.0.4",
+    "postcss": "^8",
+    "tailwindcss": "^3.3.0",
+    "typescript": "^5"
+  }
+}
