@@ -1,0 +1,101 @@
+{
+  "personalInfo": {
+    "name": "张三",
+    "title": "高级前端工程师",
+    "email": "zhangsan@example.com",
+    "phone": "+86 138-0013-8000",
+    "location": "北京市朝阳区",
+    "summary": "拥有5年前端开发经验的工程师，专注于React生态系统和现代JavaScript技术。具有丰富的大型项目经验，熟悉敏捷开发流程，善于团队协作和技术创新。"
+  },
+  "socialLinks": [
+    {
+      "platform": "GitHub",
+      "url": "https://github.com/zhangsan"
+    },
+    {
+      "platform": "LinkedIn",
+      "url": "https://linkedin.com/in/zhangsan"
+    }
+  ],
+  "skills": [
+    "JavaScript/TypeScript",
+    "React & Next.js",
+    "Vue.js",
+    "Node.js",
+    "HTML5/CSS3",
+    "Tailwind CSS",
+    "Git/GitHub",
+    "Docker",
+    "AWS",
+    "Agile/Scrum"
+  ],
+  "experience": [
+    {
+      "company": "阿里巴巴集团",
+      "position": "高级前端工程师",
+      "startDate": "2022年3月",
+      "endDate": "至今",
+      "description": "负责电商平台前端架构设计和核心功能开发。主导团队采用React 18和Next.js 13重构主要业务模块，性能提升40%。参与微前端架构设计，支持多团队并行开发。指导初级工程师成长，建立前端代码规范和最佳实践。"
+    },
+    {
+      "company": "腾讯科技",
+      "position": "前端工程师",
+      "startDate": "2020年6月",
+      "endDate": "2022年2月",
+      "description": "参与社交产品前端开发，使用Vue.js构建高性能用户界面。优化页面加载速度，首屏时间减少30%。开发可复用组件库，提高团队开发效率。参与产品需求分析和技术方案设计。"
+    }
+  ],
+  "projects": [
+    {
+      "name": "AI简历生成器",
+      "description": "基于Next.js和AI技术的智能简历生成平台，集成Google Gemini和DeepSeek API，支持实时预览和HTML导出功能。",
+      "technologies": [
+        "Next.js",
+        "TypeScript",
+        "Tailwind CSS",
+        "Google Gemini API",
+        "Zod"
+      ],
+      "url": "https://github.com/zhangsan/ai-resume-generator"
+    },
+    {
+      "name": "电商管理后台",
+      "description": "企业级电商管理系统前端，包含商品管理、订单处理、数据分析等模块。采用微前端架构，支持模块化部署。",
+      "technologies": [
+        "React",
+        "Ant Design",
+        "TypeScript",
+        "Webpack",
+        "ECharts"
+      ],
+      "url": ""
+    }
+  ],
+  "education": [
+    {
+      "school": "清华大学",
+      "degree": "学士学位",
+      "field": "计算机科学与技术",
+      "startDate": "2016年9月",
+      "endDate": "2020年6月",
+      "gpa": "3.8/4.0"
+    }
+  ],
+  "languages": [
+    "中文（母语）",
+    "英语（流利）",
+    "日语（基础）"
+  ],
+  "certifications": [
+    "AWS认证解决方案架构师",
+    "阿里云认证开发工程师",
+    "PMP项目管理专业人士"
+  ],
+  "interests": [
+    "开源项目贡献",
+    "技术博客写作",
+    "摄影",
+    "跑步",
+    "阅读"
+  ]
+} 
