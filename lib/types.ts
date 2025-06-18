@@ -2,6 +2,10 @@ export interface IndustryJobInfo {
   industry: string;
   job: string;
   promptSets: number;
+  customIndustry?: string;
+  customJob?: string;
+  isCustomIndustry?: boolean;
+  isCustomJob?: boolean;
 }
 
 // 保留原有接口以兼容现有代码

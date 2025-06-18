@@ -22,26 +22,34 @@ export default function HomePage() {
   const [selectedJob, setSelectedJob] = useState('');
   const [promptSets, setPromptSets] = useState(3);
   const [resumeContent, setResumeContent] = useState<ResumeContent | null>(null);
+  
+  // 自定义输入状态
+  const [customIndustry, setCustomIndustry] = useState('');
+  const [customJob, setCustomJob] = useState('');
+  const [isCustomIndustry, setIsCustomIndustry] = useState(false);
+  const [isCustomJob, setIsCustomJob] = useState(false);
 
   const handleGeneratePromptSets = async () => {
-    if (!selectedIndustry || !selectedJob) {
-      toast.error('请选择行业和职业');
+    // 验证必填字段
+    const hasValidIndustry = isCustomIndustry ? customIndustry.trim() : selectedIndustry;
+    const hasValidJob = isCustomJob ? customJob.trim() : selectedJob;
+    
+    if (!hasValidIndustry || !hasValidJob) {
+      toast.error('请选择或输入行业和职业');
       return;
     }
 
-    const industry = getIndustryById(selectedIndustry);
-    const job = industry?.jobs.find(j => j.id === selectedJob);
-
-    if (!industry || !job) {
-      toast.error('选择的行业或职业无效');
-      return;
-    }
-
+    // 构建 IndustryJobInfo 对象
     const industryJobInfo: IndustryJobInfo = {
-      industry: industry.name,
-      job: job.name,
-      promptSets
+      industry: selectedIndustry,
+      job: selectedJob,
+      promptSets,
+      customIndustry: customIndustry.trim(),
+      customJob: customJob.trim(),
+      isCustomIndustry,
+      isCustomJob
     };
+
     setIsLoading(true);
     setGeneratedContent(null);
     setModelInfo(null);
@@ -91,6 +99,13 @@ export default function HomePage() {
     }
   };
 
+  // 检查是否可以生成
+  const canGenerate = () => {
+    const hasValidIndustry = isCustomIndustry ? customIndustry.trim() : selectedIndustry;
+    const hasValidJob = isCustomJob ? customJob.trim() : selectedJob;
+    return hasValidIndustry && hasValidJob;
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
@@ -130,9 +145,17 @@ export default function HomePage() {
               selectedIndustry={selectedIndustry}
               selectedJob={selectedJob}
               promptSets={promptSets}
+              customIndustry={customIndustry}
+              customJob={customJob}
+              isCustomIndustry={isCustomIndustry}
+              isCustomJob={isCustomJob}
               onIndustryChange={setSelectedIndustry}
               onJobChange={setSelectedJob}
               onPromptSetsChange={setPromptSets}
+              onCustomIndustryChange={setCustomIndustry}
+              onCustomJobChange={setCustomJob}
+              onCustomIndustryToggle={setIsCustomIndustry}
+              onCustomJobToggle={setIsCustomJob}
             />
             
             <ResumeInput
@@ -148,7 +171,7 @@ export default function HomePage() {
             <GenerateButton
               onGenerate={handleGeneratePromptSets}
               isLoading={isLoading}
-              disabled={!selectedIndustry || !selectedJob}
+              disabled={!canGenerate()}
             />
           </div>
 

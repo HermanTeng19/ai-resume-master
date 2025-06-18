@@ -6,9 +6,27 @@ import { GenerateResumeRequest, GenerateResumeResponse } from '@/lib/types';
 
 // Validation schemas
 const IndustryJobInfoSchema = z.object({
-  industry: z.string().min(1, 'Industry is required'),
-  job: z.string().min(1, 'Job is required'),
+  industry: z.string(),
+  job: z.string(),
   promptSets: z.number().min(1).max(5, 'Prompt sets must be between 1 and 5'),
+  customIndustry: z.string().optional(),
+  customJob: z.string().optional(),
+  isCustomIndustry: z.boolean().optional(),
+  isCustomJob: z.boolean().optional(),
+}).refine((data) => {
+  // 验证行业信息
+  const hasValidIndustry = data.isCustomIndustry 
+    ? (data.customIndustry && data.customIndustry.trim().length > 0)
+    : (data.industry && data.industry.trim().length > 0);
+  
+  // 验证职业信息
+  const hasValidJob = data.isCustomJob
+    ? (data.customJob && data.customJob.trim().length > 0)
+    : (data.job && data.job.trim().length > 0);
+  
+  return hasValidIndustry && hasValidJob;
+}, {
+  message: 'Industry and job information are required (either selected or custom input)'
 });
 
 const ResumeContentSchema = z.object({
@@ -40,7 +58,15 @@ export async function POST(request: NextRequest) {
     const { industryJobInfo, resumeContent, selectedModel } = validationResult.data as GenerateResumeRequest;
 
     console.log('🚀 开始生成提示词套装');
-    console.log('📋 行业职业信息:', industryJobInfo);
+    console.log('📋 行业职业信息:', {
+      industry: industryJobInfo.industry,
+      job: industryJobInfo.job,
+      customIndustry: industryJobInfo.customIndustry,
+      customJob: industryJobInfo.customJob,
+      isCustomIndustry: industryJobInfo.isCustomIndustry,
+      isCustomJob: industryJobInfo.isCustomJob,
+      promptSets: industryJobInfo.promptSets
+    });
     console.log('📄 简历内容:', resumeContent ? '已提供' : '未提供');
     console.log('🤖 选择模型:', selectedModel);
 

@@ -1,4 +1,5 @@
 import { IndustryJobInfo, ResumeContent } from './types';
+import { getIndustryById, getJobById } from './industries';
 
 export const BASE_PROMPT = `你是一位专业网页设计师兼前端工程师，我希望你帮我设计并实现一个 **现代感强、简洁优雅且具备吸引力的个人简历网页**，使用 **HTML5 + Tailwind CSS** 技术栈，输出为一个完整的单 HTML 文件。
 
@@ -80,9 +81,18 @@ export const BASE_PROMPT = `你是一位专业网页设计师兼前端工程师�
  * 这个函数生成的内容将发送给AI模型进行优化
  */
 export function generateAIRequest(industryJobInfo: IndustryJobInfo): string {
-  const { industry, job, promptSets } = industryJobInfo;
+  const { industry, job, promptSets, customIndustry, customJob, isCustomIndustry, isCustomJob } = industryJobInfo;
   
-  let aiRequest = `请为${industry}行业的${job}职位生成${promptSets}套不同风格的简历页面设计提示词。
+  // 获取实际的行业和职业名称
+  const actualIndustryName = isCustomIndustry ? customIndustry : getIndustryById(industry)?.name;
+  const actualJobName = isCustomJob ? customJob : getJobById(industry, job)?.name;
+  
+  // 验证必要信息是否存在
+  if (!actualIndustryName || !actualJobName) {
+    throw new Error('行业和职业信息不完整，请检查输入');
+  }
+  
+  let aiRequest = `请为${actualIndustryName}行业的${actualJobName}职位生成${promptSets}套不同风格的简历页面设计提示词。
 
 **重要要求：请创造性地设计独特且富有创意的简历页面风格**
 
@@ -90,7 +100,7 @@ export function generateAIRequest(industryJobInfo: IndustryJobInfo): string {
 🎯 任务说明：
 ---------------------------
 我需要你根据以下行业职业信息和基础模板，生成${promptSets}套针对性优化的提示词。每套提示词都应该：
-1. 深度融合${industry}行业的文化特色和${job}的专业特点
+1. 深度融合${actualIndustryName}行业的文化特色和${actualJobName}的专业特点
 2. 创造独特且富有创意的设计风格，避免使用常见的固定描述
 3. 为每套风格创造一个独特且吸引人的名称
 4. 确保多套风格之间有明显的差异化特色
@@ -99,8 +109,8 @@ export function generateAIRequest(industryJobInfo: IndustryJobInfo): string {
 ---------------------------
 📋 目标信息：
 ---------------------------
-**目标行业：** ${industry}
-**目标职业：** ${job}
+**目标行业：** ${actualIndustryName}${isCustomIndustry ? ' (自定义行业)' : ''}
+**目标职业：** ${actualJobName}${isCustomJob ? ' (自定义职业)' : ''}
 **需要套数：** ${promptSets}套
 
 ---------------------------
@@ -114,8 +124,8 @@ ${BASE_PROMPT}
 请为每套提示词创造独特的设计风格，可以从以下维度进行创新：
 
 **视觉风格维度：**
-- 色彩搭配：结合${industry}行业特色，创造独特的色彩方案
-- 字体选择：体现${job}的专业特质和个性表达
+- 色彩搭配：结合${actualIndustryName}行业特色，创造独特的色彩方案
+- 字体选择：体现${actualJobName}的专业特质和个性表达
 - 布局结构：突破常规，设计创新的信息组织方式
 
 **交互体验维度：**
@@ -124,15 +134,15 @@ ${BASE_PROMPT}
 - 响应式设计：考虑不同设备的独特展示效果
 
 **情感表达维度：**
-- 传达${job}的职业态度和发展愿景
+- 传达${actualJobName}的职业态度和发展愿景
 - 体现个人特质和价值观
-- 展现对${industry}行业的理解和热情
+- 展现对${actualIndustryName}行业的理解和热情
 
 **创新要求：**
 - 避免使用"现代简约"、"商务风格"、"科技感"等常见固定描述
 - 每套风格都要有独特的创意命名和设计理念
-- 结合${industry}的行业文化，创造专属的视觉语言
-- 突出${job}的核心竞争力和专业价值
+- 结合${actualIndustryName}的行业文化，创造专属的视觉语言
+- 突出${actualJobName}的核心竞争力和专业价值${isCustomIndustry || isCustomJob ? '\n- 特别注意：由于涉及自定义的行业或职业，请充分发挥创意，深入理解该领域的特点和需求' : ''}
 
 ---------------------------
 📦 输出要求：
