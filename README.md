@@ -6,6 +6,7 @@
 
 - **AI驱动**: 集成Google Gemini 2.0 Flash和Siliconflow DeepSeek V3 API
 - **行业专属**: 支持6大行业，30+职业的专业提示词生成
+- **🎯 自定义输入**: 支持用户自定义行业和职业，不再局限于预设选项
 - **多套风格**: 可生成1-5套不同风格的提示词套装
 - **分页预览**: 支持多套提示词分页显示，独立浏览每套内容
 - **Markdown渲染**: 格式化显示提示词，支持标题、列表、代码等元素
@@ -103,7 +104,7 @@ ai-resume-generator/
 │   └── page.tsx                    # 主页面
 │
 ├── components/                     # React组件
-│   ├── IndustryJobForm.tsx         # 行业职业表单
+│   ├── IndustryJobForm.tsx         # 行业职业表单（支持自定义输入）
 │   ├── ModelSelector.tsx           # AI模型选择器
 │   └── PreviewPane.tsx             # 预览面板
 │
@@ -111,7 +112,7 @@ ai-resume-generator/
 │   ├── ai-service.ts               # AI服务集成
 │   ├── industries.ts               # 行业职业配置
 │   ├── models.ts                   # AI模型配置
-│   ├── prompts.ts                  # 提示词管理
+│   ├── prompts.ts                  # 提示词管理（支持自定义输入）
 │   └── types.ts                    # TypeScript类型定义
 │
 ├── styles/                         # 样式文件
@@ -126,14 +127,47 @@ ai-resume-generator/
 
 ## 🎯 使用方法
 
-1. **选择行业**: 从下拉列表中选择目标行业（金融业、科技行业、医疗健康等）
-2. **选择职业**: 根据所选行业，选择具体的职业角色
+### 基础使用流程
+
+1. **选择行业**: 
+   - 从下拉列表中选择预设行业（金融业、科技行业、医疗健康等）
+   - 🆕 **或选择"🎯 自定义行业"来输入您的专属行业**
+   
+2. **选择职业**: 
+   - 根据所选行业，选择具体的职业角色
+   - 🆕 **或选择"🎯 自定义职业"来输入您的专属职业**
+   
 3. **设置套数**: 选择要生成的提示词套数（1-5套）
 4. **选择AI模型**: 在模型选择区域点击选择您偏好的AI模型
 5. **生成提示词**: 点击"生成提示词套装"按钮
 6. **预览结果**: 在右侧预览面板查看生成的提示词套装
 7. **分页浏览**: 使用导航按钮在不同套数之间切换
 8. **下载内容**: 点击"下载提示词"按钮保存所有套数
+
+### 🎯 自定义输入功能
+
+**自定义行业示例：**
+- 新能源汽车
+- 生物制药
+- 区块链技术
+- 量子计算
+- 虚拟现实/增强现实
+- 智能制造
+- 绿色能源
+
+**自定义职业示例：**
+- AI产品经理
+- 区块链开发工程师
+- 新媒体运营专家
+- 数字化转型顾问
+- 智能硬件工程师
+- 可持续发展专家
+- 元宇宙设计师
+
+**使用技巧：**
+- 自定义输入时，系统会特别针对您的行业和职业特点生成更精准的提示词
+- 输入框提供智能提示，帮助您更好地描述专业领域
+- 支持中英文输入，系统会自动适配处理
 
 ## 🛠️ 技术栈
 
@@ -152,6 +186,7 @@ ai-resume-generator/
 - 输入数据验证和清理
 - 安全的HTML预览（使用iframe沙箱）
 - CORS保护
+- 自定义输入内容过滤和验证
 
 ## 📝 开发说明
 
@@ -170,6 +205,12 @@ ai-resume-generator/
 
 ### 样式定制
 修改 `styles/globals.css` 文件来自定义应用的样式主题。
+
+### 🆕 自定义输入功能扩展
+- 在 `lib/types.ts` 中的 `IndustryJobInfo` 接口包含了自定义字段
+- `components/IndustryJobForm.tsx` 组件处理自定义输入的UI交互
+- `lib/prompts.ts` 中的 `generateAIRequest` 函数支持自定义输入处理
+- API验证模式已更新以支持自定义字段验证
 
 ## 🧪 测试
 
@@ -199,6 +240,9 @@ npm run test-pagination-fix
 
 # 测试DeepSeek提示词生成
 npm run test-deepseek
+
+# 🆕 测试自定义输入功能
+npm run test-custom-input
 ```
 
 ### 测试说明
@@ -210,6 +254,7 @@ npm run test-deepseek
 - **test-siliconflow**: 测试Siliconflow API集成和DeepSeek V3模型
 - **test-pagination-fix**: 测试分页解析功能的鲁棒性和各种格式支持
 - **test-deepseek**: 测试DeepSeek模型的多套提示词生成功能
+- **test-custom-input**: 测试自定义输入功能的鲁棒性和各种格式支持
 
 ## 🚀 部署
 
