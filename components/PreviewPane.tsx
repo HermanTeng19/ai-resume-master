@@ -4,10 +4,12 @@ import React, { useState, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import toast from 'react-hot-toast';
+import HTMLCodeModal from './HTMLCodeModal';
 
 interface PreviewPaneProps {
   html: string | null;
   isLoading: boolean;
+  selectedModel?: string;
 }
 
 interface PromptSet {
@@ -16,9 +18,10 @@ interface PromptSet {
   content: string;
 }
 
-export default function PreviewPane({ html, isLoading }: PreviewPaneProps) {
+export default function PreviewPane({ html, isLoading, selectedModel = 'gemini' }: PreviewPaneProps) {
   const [currentPage, setCurrentPage] = useState(0);
   const [promptSets, setPromptSets] = useState<PromptSet[]>([]);
+  const [isHTMLModalOpen, setIsHTMLModalOpen] = useState(false);
 
   // 解析HTML内容，提取不同套数的提示词
   useEffect(() => {
@@ -160,6 +163,14 @@ export default function PreviewPane({ html, isLoading }: PreviewPaneProps) {
     setCurrentPage(pageIndex);
   };
 
+  const handleGenerateHTML = () => {
+    setIsHTMLModalOpen(true);
+  };
+
+  const handleCloseHTMLModal = () => {
+    setIsHTMLModalOpen(false);
+  };
+
   if (isLoading) {
     return (
       <div className="card h-full flex items-center justify-center min-h-[500px]">
@@ -209,6 +220,13 @@ export default function PreviewPane({ html, isLoading }: PreviewPaneProps) {
           >
             <i className="fas fa-download mr-2"></i>
             下载提示词
+          </button>
+          <button
+            onClick={handleGenerateHTML}
+            className="btn-primary bg-purple-600 hover:bg-purple-700"
+          >
+            <i className="fas fa-code mr-2"></i>
+            生成HTML
           </button>
         </div>
       </div>
@@ -312,6 +330,14 @@ export default function PreviewPane({ html, isLoading }: PreviewPaneProps) {
           </button>
         </div>
       )}
+
+      {/* HTML代码生成模态框 */}
+      <HTMLCodeModal
+        isOpen={isHTMLModalOpen}
+        onClose={handleCloseHTMLModal}
+        promptContent={html || ''}
+        selectedModel={selectedModel}
+      />
     </div>
   );
 } 

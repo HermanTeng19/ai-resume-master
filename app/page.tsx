@@ -177,7 +177,7 @@ export default function HomePage() {
 
           {/* Right Column - Preview */}
           <div className="lg:sticky lg:top-8 lg:h-fit">
-            <PreviewPane html={generatedContent} isLoading={isLoading} />
+            <PreviewPane html={generatedContent} isLoading={isLoading} selectedModel={selectedModel} />
           </div>
         </div>
       </main>
