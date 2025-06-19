@@ -2,6 +2,8 @@
 
 import React, { useState, useEffect } from 'react';
 import toast from 'react-hot-toast';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 interface HTMLCodeModalProps {
   isOpen: boolean;
@@ -139,35 +141,57 @@ export default function HTMLCodeModal({ isOpen, onClose, promptContent, selected
 
         {/* 内容区域 */}
         <div className="flex-1 overflow-hidden">
-          {isLoading ? (
-            <div className="h-full flex items-center justify-center">
-              <div className="text-center">
-                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto mb-4"></div>
-                <p className="text-gray-600">AI正在生成HTML代码...</p>
-              </div>
-            </div>
-          ) : error ? (
-            <div className="h-full flex items-center justify-center">
-              <div className="text-center text-red-600">
-                <i className="fas fa-exclamation-triangle text-4xl mb-4"></i>
-                <p className="text-lg font-medium mb-2">生成失败</p>
-                <p className="text-sm">{error}</p>
-                <button
-                  onClick={handleRegenerateHTML}
-                  className="mt-4 px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 transition-colors"
-                >
-                  重试
-                </button>
-              </div>
-            </div>
+                     {isLoading ? (
+             <div className="h-full flex items-center justify-center bg-gray-900">
+               <div className="text-center">
+                 <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-400 mx-auto mb-4"></div>
+                 <p className="text-gray-300">AI正在生成HTML代码...</p>
+                 <p className="text-gray-500 text-sm mt-2">正在调用 {selectedModel === 'gemini' ? 'Google Gemini' : 'DeepSeek'} 模型...</p>
+               </div>
+             </div>
+                     ) : error ? (
+             <div className="h-full flex items-center justify-center bg-gray-900">
+               <div className="text-center">
+                 <i className="fas fa-exclamation-triangle text-4xl mb-4 text-red-400"></i>
+                 <p className="text-lg font-medium mb-2 text-red-300">生成失败</p>
+                 <p className="text-sm text-gray-400 mb-4">{error}</p>
+                 <button
+                   onClick={handleRegenerateHTML}
+                   className="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors font-medium"
+                 >
+                   <i className="fas fa-redo mr-2"></i>
+                   重试
+                 </button>
+               </div>
+             </div>
           ) : htmlCode ? (
             <div className="h-full flex">
               {/* 代码视图 */}
               {!isPreviewMode && (
-                <div className="w-full h-full overflow-auto p-4">
-                  <pre className="bg-gray-50 p-4 rounded-lg text-sm overflow-auto h-full">
-                    <code className="language-html">{htmlCode}</code>
-                  </pre>
+                <div className="w-full h-full overflow-auto">
+                  <SyntaxHighlighter
+                    language="html"
+                    style={vscDarkPlus}
+                    customStyle={{
+                      margin: 0,
+                      height: '100%',
+                      fontSize: '13px',
+                      lineHeight: '1.5',
+                      borderRadius: '0',
+                      background: '#1e1e1e',
+                    }}
+                    showLineNumbers={true}
+                    wrapLines={true}
+                    wrapLongLines={true}
+                    lineNumberStyle={{
+                      minWidth: '3em',
+                      paddingRight: '1em',
+                      color: '#858585',
+                      backgroundColor: '#1e1e1e',
+                    }}
+                  >
+                    {htmlCode}
+                  </SyntaxHighlighter>
                 </div>
               )}
               
@@ -183,14 +207,14 @@ export default function HTMLCodeModal({ isOpen, onClose, promptContent, selected
                 </div>
               )}
             </div>
-          ) : (
-            <div className="h-full flex items-center justify-center">
-              <div className="text-center text-gray-500">
-                <i className="fas fa-file-code text-6xl mb-4 text-gray-300"></i>
-                <p className="text-lg">准备生成HTML代码</p>
-                <p className="text-sm">正在初始化...</p>
-              </div>
-            </div>
+                     ) : (
+             <div className="h-full flex items-center justify-center bg-gray-900">
+               <div className="text-center">
+                 <i className="fas fa-file-code text-6xl mb-4 text-gray-600"></i>
+                 <p className="text-lg text-gray-300">准备生成HTML代码</p>
+                 <p className="text-sm text-gray-500">正在初始化...</p>
+               </div>
+             </div>
           )}
         </div>
       </div>
