@@ -88,6 +88,26 @@ export default function HTMLCodeModal({ isOpen, onClose, promptContent, selected
     generateHTMLCode();
   };
 
+  const handleDownloadHTML = () => {
+    if (!htmlCode) return;
+    
+    try {
+      const blob = new Blob([htmlCode], { type: 'text/html;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'ai-generated-resume.html';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      toast.success('HTML文件已下载到本地');
+    } catch (error) {
+      console.error('下载失败:', error);
+      toast.error('下载失败，请重试');
+    }
+  };
+
   if (!isOpen) return null;
 
   return (
@@ -119,6 +139,13 @@ export default function HTMLCodeModal({ isOpen, onClose, promptContent, selected
                 >
                   <i className="fas fa-copy mr-1"></i>
                   复制
+                </button>
+                <button
+                  onClick={handleDownloadHTML}
+                  className="px-4 py-2 text-sm font-medium bg-orange-600 text-white rounded-md hover:bg-orange-700 transition-colors"
+                >
+                  <i className="fas fa-download mr-1"></i>
+                  下载
                 </button>
                 <button
                   onClick={handleRegenerateHTML}
