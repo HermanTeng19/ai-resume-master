@@ -10,9 +10,12 @@
 - **多套风格**: 可生成1-5套不同风格的提示词套装
 - **分页预览**: 支持多套提示词分页显示，独立浏览每套内容
 - **Markdown渲染**: 格式化显示提示词，支持标题、列表、代码等元素
+- **🆕 HTML代码生成**: 基于提示词生成完整的HTML简历页面
+- **🆕 代码语法高亮**: 专业的代码编辑器风格显示，支持VS Code Dark Plus主题
+- **🆕 实时预览**: 代码视图与网页预览模式自由切换
+- **🆕 文件下载**: 支持复制代码和下载HTML文件到本地
 - **模型选择**: 卡片化AI模型选择界面，支持动态切换
 - **现代设计**: 使用Tailwind CSS构建美观响应式界面
-- **实时预览**: 即时预览生成的提示词内容
 - **智能组合**: 基于行业和职业特点智能生成定制化提示词
 - **安全验证**: 使用Zod进行数据验证
 - **AI模型显示**: 显示使用的AI模型和生成时间
@@ -97,8 +100,10 @@
 ai-resume-generator/
 ├── app/                            # Next.js App Router
 │   ├── api/                        # API routes
-│   │   └── generate-resume/
-│   │       └── route.ts            # 简历生成API
+│   │   ├── generate-resume/
+│   │   │   └── route.ts            # 提示词生成API
+│   │   └── generate-html/          # 🆕 HTML代码生成API
+│   │       └── route.ts            # HTML代码生成API
 │   ├── globals.css                 # 全局样式
 │   ├── layout.tsx                  # 根布局
 │   └── page.tsx                    # 主页面
@@ -106,14 +111,18 @@ ai-resume-generator/
 ├── components/                     # React组件
 │   ├── IndustryJobForm.tsx         # 行业职业表单（支持自定义输入）
 │   ├── ModelSelector.tsx           # AI模型选择器
-│   └── PreviewPane.tsx             # 预览面板
+│   ├── PreviewPane.tsx             # 预览面板
+│   ├── ResumeForm.tsx              # 简历表单组件
+│   ├── ResumeInput.tsx             # 简历内容输入组件
+│   ├── GenerateButton.tsx          # 生成按钮组件
+│   └── HTMLCodeModal.tsx           # 🆕 HTML代码生成器模态窗口
 │
 ├── lib/                            # 工具库
 │   ├── ai-service.ts               # AI服务集成
 │   ├── industries.ts               # 行业职业配置
 │   ├── models.ts                   # AI模型配置
 │   ├── prompts.ts                  # 提示词管理（支持自定义输入）
-│   └── types.ts                    # TypeScript类型定义
+│   └── types.ts                    # TypeScript类型定义（含HTML生成类型）
 │
 ├── styles/                         # 样式文件
 │   └── globals.css                 # Tailwind CSS配置
@@ -143,6 +152,9 @@ ai-resume-generator/
 6. **预览结果**: 在右侧预览面板查看生成的提示词套装
 7. **分页浏览**: 使用导航按钮在不同套数之间切换
 8. **下载内容**: 点击"下载提示词"按钮保存所有套数
+9. **🆕 生成HTML**: 点击"生成HTML"按钮基于提示词生成完整HTML简历
+10. **🆕 预览代码**: 在代码视图和网页预览之间切换
+11. **🆕 保存文件**: 复制代码到剪贴板或下载HTML文件到本地
 
 ### 🎯 自定义输入功能
 
@@ -169,12 +181,56 @@ ai-resume-generator/
 - 输入框提供智能提示，帮助您更好地描述专业领域
 - 支持中英文输入，系统会自动适配处理
 
+## 🆕 HTML代码生成功能
+
+### 功能概述
+基于生成的提示词，系统可以进一步调用AI模型生成完整的HTML简历页面，提供从内容到展示的完整解决方案。
+
+### 核心特性
+- **🎨 专业设计**: 生成现代、美观的HTML简历页面
+- **📱 响应式布局**: 自动适配桌面端和移动端显示
+- **🎭 语法高亮**: 使用VS Code Dark Plus主题的专业代码编辑器风格
+- **👁️ 实时预览**: 支持代码视图和网页预览模式切换
+- **📋 便捷操作**: 一键复制代码或下载HTML文件
+- **🔄 智能生成**: 基于相同AI模型确保内容一致性
+
+### 使用流程
+1. **生成提示词**: 首先按照标准流程生成提示词套装
+2. **启动HTML生成**: 点击预览面板右上角的紫色"生成HTML"按钮
+3. **等待生成**: AI模型将基于提示词内容生成完整HTML代码
+4. **查看代码**: 默认显示带语法高亮的HTML源代码
+5. **切换预览**: 点击"预览"按钮查看网页实际效果
+6. **保存结果**: 使用"复制"或"下载"按钮保存HTML代码
+
+### 功能按钮说明
+| 按钮 | 颜色 | 功能 | 说明 |
+|------|------|------|------|
+| 预览 | 蓝色/灰色 | 切换视图模式 | 在代码视图和网页预览之间切换 |
+| 复制 | 绿色 | 复制代码 | 将HTML代码复制到系统剪贴板 |
+| 下载 | 橙色 | 下载文件 | 将HTML代码保存为本地文件 |
+| 重新生成 | 蓝色 | 重新生成 | 重新调用AI生成新的HTML代码 |
+
+### 生成的HTML特点
+- **完整文档结构**: 包含DOCTYPE、head、body等标准HTML元素
+- **内嵌CSS样式**: 包含响应式设计和现代化样式
+- **语义化标签**: 使用合适的HTML语义标签结构
+- **浏览器兼容**: 兼容现代主流浏览器
+- **可定制性**: 生成的代码易于进一步编辑和定制
+
+### 技术实现
+- **API端点**: `/api/generate-html`
+- **代码高亮**: `react-syntax-highlighter` + VS Code Dark Plus主题
+- **预览安全**: 使用iframe沙箱机制确保安全预览
+- **文件下载**: 使用Blob API实现客户端文件下载
+- **错误处理**: 完善的错误提示和重试机制
+
 ## 🛠️ 技术栈
 
 - **框架**: Next.js 14 (App Router)
 - **语言**: TypeScript
 - **样式**: Tailwind CSS
 - **Markdown渲染**: React Markdown + Remark GFM
+- **🆕 代码高亮**: React Syntax Highlighter (VS Code Dark Plus主题)
 - **AI集成**: Google Gemini 2.0 Flash API / Siliconflow DeepSeek V3 API
 - **数据验证**: Zod
 - **通知**: React Hot Toast
@@ -243,6 +299,9 @@ npm run test-deepseek
 
 # 🆕 测试自定义输入功能
 npm run test-custom-input
+
+# 🆕 测试HTML代码生成功能
+npm run test-html-generation
 ```
 
 ### 测试说明
@@ -255,6 +314,7 @@ npm run test-custom-input
 - **test-pagination-fix**: 测试分页解析功能的鲁棒性和各种格式支持
 - **test-deepseek**: 测试DeepSeek模型的多套提示词生成功能
 - **test-custom-input**: 测试自定义输入功能的鲁棒性和各种格式支持
+- **test-html-generation**: 测试HTML代码生成功能的完整性和错误处理
 
 ## 🚀 部署
 
