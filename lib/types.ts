@@ -95,4 +95,18 @@ export interface GenerateResumeResponse {
     expectedSets: number;
     hasResumeContent: boolean;
   };
+}
+
+// HTML生成相关的类型定义
+export interface GenerateHTMLRequest {
+  promptContent: string;
+  selectedModel?: string;
+}
+
+export interface GenerateHTMLResponse {
+  success: boolean;
+  htmlCode?: string;
+  error?: string;
+  model?: string;
+  generatedAt?: string;
 } 
