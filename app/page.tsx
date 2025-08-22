@@ -191,7 +191,7 @@ export default function HomePage() {
               基于AI技术的智能提示词生成器
             </p>
             <p className="text-sm">
-              支持Google Gemini和DeepSeek等先进AI模型，生成行业专属提示词套装
+              支持Google Gemini和Kimi K2等先进AI模型，生成行业专属提示词套装
             </p>
           </div>
         </div>

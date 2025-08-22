@@ -1,4 +1,4 @@
 {
-  "/api/generate-html/route": "app/api/generate-html/route.js",
+  "/api/generate-resume/route": "app/api/generate-resume/route.js",
   "/page": "app/page.js"
 }

@@ -11,11 +11,11 @@ export const AVAILABLE_MODELS: AIModel[] = [
     quality: 'high'
   },
   {
-    id: 'deepseek',
-    name: 'DeepSeek V3',
-    description: '强大的开源模型，推理能力强，速度快，适合生成详细的提示词内容',
-    icon: 'fas fa-brain',
-    provider: 'Siliconflow',
+    id: 'kimi',
+    name: 'Kimi K2',
+    description: '月之暗面的最新模型，推理能力强，速度快，适合生成详细的提示词内容',
+    icon: 'fas fa-moon',
+    provider: 'OpenRouter',
     speed: 'fast',
     quality: 'high'
   }

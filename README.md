@@ -1,10 +1,10 @@
 # AI Prompt Generator - 智能提示词生成器
 
-一个基于AI技术的行业专属提示词生成器，使用Next.js构建，集成Google Gemini和DeepSeek等先进AI模型，为不同行业和职业生成多套风格化的提示词套装。
+一个基于AI技术的行业专属提示词生成器，使用Next.js构建，集成Google Gemini和Kimi K2等先进AI模型，为不同行业和职业生成多套风格化的提示词套装。
 
 ## 🌟 特性
 
-- **AI驱动**: 集成Google Gemini 2.0 Flash和Siliconflow DeepSeek V3 API
+- **AI驱动**: 集成Google Gemini 2.0 Flash和OpenRouter Kimi K2 API
 - **行业专属**: 支持6大行业，30+职业的专业提示词生成
 - **🎯 自定义输入**: 支持用户自定义行业和职业，不再局限于预设选项
 - **多套风格**: 可生成1-5套不同风格的提示词套装
@@ -58,10 +58,10 @@
    # Google Gemini 2.0 Flash API
    GOOGLE_API_KEY=your_google_gemini_api_key_here
    
-   # 或者 Siliconflow DeepSeek V3 API
-   SILICONFLOW_API_KEY=your_siliconflow_api_key_here
+   # 或者 OpenRouter Kimi K2 API
+   OPENROUTER_API_KEY=your_openrouter_api_key_here
    
-   # 设置默认使用的AI服务 (gemini 或 deepseek)
+   # 设置默认使用的AI服务 (gemini 或 kimi)
    AI_SERVICE=gemini
    ```
 
@@ -87,12 +87,12 @@
 4. 生成API密钥
 5. 将密钥添加到 `.env.local` 文件中的 `GOOGLE_API_KEY`
 
-### Siliconflow (DeepSeek V3)
-1. 访问 [Siliconflow](https://cloud.siliconflow.cn/)
+### OpenRouter (Kimi K2)
+1. 访问 [OpenRouter](https://openrouter.ai/)
 2. 注册账户并登录
 3. 前往API密钥页面
 4. 生成新的API密钥
-5. 将密钥添加到 `.env.local` 文件中的 `SILICONFLOW_API_KEY`
+5. 将密钥添加到 `.env.local` 文件中的 `OPENROUTER_API_KEY`
 
 ## 📁 项目结构
 
@@ -231,7 +231,7 @@ ai-resume-generator/
 - **样式**: Tailwind CSS
 - **Markdown渲染**: React Markdown + Remark GFM
 - **🆕 代码高亮**: React Syntax Highlighter (VS Code Dark Plus主题)
-- **AI集成**: Google Gemini 2.0 Flash API / Siliconflow DeepSeek V3 API
+- **AI集成**: Google Gemini 2.0 Flash API / OpenRouter Kimi K2 API
 - **数据验证**: Zod
 - **通知**: React Hot Toast
 - **图标**: Font Awesome
@@ -288,14 +288,14 @@ npm run test-models
 # 测试Markdown渲染功能
 npm run test-markdown
 
-# 测试Siliconflow API集成
-npm run test-siliconflow
+# 测试OpenRouter API集成
+npm run test-openrouter
 
 # 测试分页功能修复
 npm run test-pagination-fix
 
-# 测试DeepSeek提示词生成
-npm run test-deepseek
+# 测试Kimi K2提示词生成
+npm run test-kimi
 
 # 🆕 测试自定义输入功能
 npm run test-custom-input
@@ -310,9 +310,9 @@ npm run test-html-generation
 - **test-pagination**: 验证分页预览功能的内容解析
 - **test-models**: 测试不同AI模型的切换功能
 - **test-markdown**: 验证Markdown渲染功能和格式化显示
-- **test-siliconflow**: 测试Siliconflow API集成和DeepSeek V3模型
+- **test-openrouter**: 测试OpenRouter API集成和Kimi K2模型
 - **test-pagination-fix**: 测试分页解析功能的鲁棒性和各种格式支持
-- **test-deepseek**: 测试DeepSeek模型的多套提示词生成功能
+- **test-kimi**: 测试Kimi K2模型的多套提示词生成功能
 - **test-custom-input**: 测试自定义输入功能的鲁棒性和各种格式支持
 - **test-html-generation**: 测试HTML代码生成功能的完整性和错误处理
 
@@ -326,7 +326,7 @@ npm run test-html-generation
 
 ### 其他平台
 确保在部署平台配置正确的环境变量：
-- `GOOGLE_API_KEY` 或 `SILICONFLOW_API_KEY`
+- `GOOGLE_API_KEY` 或 `OPENROUTER_API_KEY`
 - `AI_SERVICE`
 
 ## 🤝 贡献
