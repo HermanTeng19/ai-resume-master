@@ -209,7 +209,7 @@
 
 - 基础AI提示词生成功能
 - 支持6大行业，30+职业的专业提示词生成
-- 集成Google Gemini和Kimi K2 AI模型
+- 集成Google Gemini和DeepSeek V3.1 AI模型
 - 多套风格提示词生成
 - 分页预览和Markdown渲染
 - 现代化响应式UI设计 

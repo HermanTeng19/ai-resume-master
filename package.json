@@ -15,7 +15,7 @@
     "test-markdown": "node scripts/test-markdown-render.js",
     "test-openrouter": "node scripts/test-openrouter.js",
     "test-pagination-fix": "node scripts/test-pagination-fix.js",
-    "test-kimi": "node scripts/test-kimi-prompt-generation.js",
+    "test-deepseek": "node scripts/test-deepseek-prompt-generation.js",
     "test-resume-input": "node scripts/test-resume-input.js"
   },
   "dependencies": {

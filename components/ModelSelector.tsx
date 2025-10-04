@@ -104,8 +104,8 @@ export default function ModelSelector({ selectedModel, onModelSelect }: ModelSel
           <div className="text-sm text-blue-700">
             <p className="font-medium mb-1">选择提示：</p>
             <ul className="list-disc list-inside space-y-1 text-xs">
-              <li><strong>Google Gemini 2.0 Flash</strong>：响应速度快，适合快速生成简历</li>
-              <li><strong>Kimi K2</strong>：推理能力强，适合生成详细内容</li>
+              <li><strong>Google Gemini 2.5 Flash</strong>：响应速度快，适合快速生成简历</li>
+              <li><strong>DeepSeek V3.1</strong>：推理能力强，适合生成详细内容</li>
             </ul>
           </div>
         </div>

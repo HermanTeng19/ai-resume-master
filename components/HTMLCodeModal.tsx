@@ -173,7 +173,7 @@ export default function HTMLCodeModal({ isOpen, onClose, promptContent, selected
                <div className="text-center">
                  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-400 mx-auto mb-4"></div>
                  <p className="text-gray-300">AI正在生成HTML代码...</p>
-                 <p className="text-gray-500 text-sm mt-2">正在调用 {selectedModel === 'gemini' ? 'Google Gemini' : 'Kimi K2'} 模型...</p>
+                 <p className="text-gray-500 text-sm mt-2">正在调用 {selectedModel === 'gemini' ? 'Google Gemini' : 'DeepSeek V3.1'} 模型...</p>
                </div>
              </div>
                      ) : error ? (

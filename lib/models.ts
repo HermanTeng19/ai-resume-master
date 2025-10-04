@@ -3,18 +3,18 @@ import { AIModel } from './types';
 export const AVAILABLE_MODELS: AIModel[] = [
   {
     id: 'gemini',
-    name: 'Google Gemini 2.5 Flash Preview',
-    description: '最新的Google AI模型，速度快，质量高，适合快速生成专业简历',
+    name: 'Google Gemini 2.5 Flash',
+    description: 'Google最新的Gemini 2.5 Flash模型，速度快，质量高，适合快速生成专业简历',
     icon: 'fas fa-bolt',
     provider: 'Google',
     speed: 'fast',
     quality: 'high'
   },
   {
-    id: 'kimi',
-    name: 'Kimi K2',
-    description: '月之暗面的最新模型，推理能力强，速度快，适合生成详细的提示词内容',
-    icon: 'fas fa-moon',
+    id: 'deepseek',
+    name: 'DeepSeek V3.1',
+    description: 'DeepSeek最新模型，推理能力强，速度快，适合生成详细的提示词内容',
+    icon: 'fas fa-brain',
     provider: 'OpenRouter',
     speed: 'fast',
     quality: 'high'
