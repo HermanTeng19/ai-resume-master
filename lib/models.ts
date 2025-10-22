@@ -12,8 +12,8 @@ export const AVAILABLE_MODELS: AIModel[] = [
   },
   {
     id: 'deepseek',
-    name: 'DeepSeek R1',
-    description: 'DeepSeek最新推理模型，具有强大的逻辑推理能力，适合生成高质量的提示词内容',
+    name: 'DeepSeek V3.1',
+    description: 'DeepSeek V3.1 付费模型，具有强大的推理能力和高质量输出，适合生成专业的提示词内容',
     icon: 'fas fa-brain',
     provider: 'OpenRouter',
     speed: 'fast',
